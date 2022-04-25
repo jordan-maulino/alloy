@@ -15,13 +15,27 @@
         margin: auto;
         width: 60%;    
         padding: 10px;
-}
+    }
+    .navbar-brand {
+        padding: 0 15px;
+        height: 30px;
+        border-right: 1px solid #000;
+    }
+    .img-responsive{
+        max-height:50%;
+        max-width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        
+    }
 </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{{url_for('index')}}" >JM Financial</a>
-    </nav>
+    <div class = 'container-fluid'>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #89929e;">
+            <a class="navbar-brand mb-0 h1" href="{{url_for('index')}}" >JM Financial</a>
+        </nav>
+    </div>
 
     {% block content %}
 
