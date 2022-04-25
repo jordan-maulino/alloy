@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import (StringField, SubmitField, EmailField,
                     TelField, SelectField, DateField, IntegerField)
-from wtforms.validators import DataRequired, Email, Length, Optional 
+from wtforms.validators import DataRequired, Email, Length, Optional, ValidationError 
 
 class InfoForm(FlaskForm):
     name_first = StringField('First Name: ', validators=[DataRequired()])
@@ -11,7 +11,7 @@ class InfoForm(FlaskForm):
     email_address = EmailField("Email: ", validators=[DataRequired()])
     phone_number = TelField('Phone Number: ', validators=[Optional(), Length(11)])
     address_line_1 = StringField("Street Address: ", validators=[DataRequired()])
-    address_line_2 = StringField("Street Address line 2 (optional): ", validators=[Optional()])
+    address_line_2 = StringField("Street Address 2: ", validators=[Optional()])
     address_city = StringField("City: ", validators=[DataRequired()])
     address_state = StringField("State: ", validators=[DataRequired(), Length(2)])
     address_postal_code = TelField("ZIP Code: ", validators=[DataRequired(), Length(5)])
