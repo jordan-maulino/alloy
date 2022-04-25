@@ -56,7 +56,7 @@ def apply():
         response = requests.post(url, headers=headers, auth = (token, secret), json=data)
         
         response_json = response.json()
-        print(response_json["summary"]["result"])
+        print(response_json["summary"]["outcome"])
 
         return response.content
     
