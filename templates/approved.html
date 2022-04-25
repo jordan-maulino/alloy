@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br>
+<h2>Approved!</h2>
+<br>
+
+<div class="container-md">
+    <h3>Congratulations, {{session['name_first'].title()}}!</h3>
+    <br>
+    <h4>Your application has been approved. Welcome to JMFinancial. We're excited to have you.</h4>
+</div>
+
+{% endblock %}

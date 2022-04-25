@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify, make_response
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify, make_response
 from form import InfoForm
 
 import requests 
@@ -25,17 +25,33 @@ def index():
 
     return render_template('index.html')
 
+@app.route('/approved')
+def approved():
+    
+    return render_template('approved.html')
+
+@app.route('/denied')
+def denied():
+
+    return render_template('denied.html')
+
+@app.route('/review')
+def review():
+
+    return render_template('review.html')
+
 @app.route('/apply', methods=['GET', 'POST'])
 def apply():
     form = InfoForm()
 
     if form.validate_on_submit():
-        # data=jsonify(request.form)
+        
         # data=request.form
         # headers = {'Content-type':'application/json'}
         # response = requests.post(
         #    url, headers=headers, auth= (token, secret), json=data,
         # )
+        session['name_first'] = form.name_first.data
 
         data = {}
         data['name_first'] = form.name_first.data
@@ -51,12 +67,22 @@ def apply():
         data['address_postal_code'] = form.address_postal_code.data
         data['address_country_code'] = form.address_country_code.data
 
+
         headers = {'Content-type':'application/json'}
 
         response = requests.post(url, headers=headers, auth = (token, secret), json=data)
         
         response_json = response.json()
-        print(response_json["summary"]["outcome"])
+        outcome = response_json["summary"]["outcome"]
+
+        if (outcome == "Approved"):
+            return redirect(url_for('approved'))
+        
+        elif(outcome == "Denied"):
+            return redirect(url_for('denied'))
+        
+        elif(outcome == "Manual Review"):
+            return redirect(url_for('review'))
 
         return response.content
     
