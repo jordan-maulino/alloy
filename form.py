@@ -9,18 +9,12 @@ class InfoForm(FlaskForm):
     birth_date = DateField("Date of Birth: ", format='%Y-%m-%d', validators=[DataRequired()])
     document_ssn = TelField("SSN: ", validators=[DataRequired(), Length(9)])
     email_address = EmailField("Email: ", validators=[DataRequired()])
-    phone_number = TelField('Phone Number: ', validators=[Optional(), Length(11)])
+    phone_number = TelField('Phone Number: ', validators=[DataRequired(), Length(11)])
     address_line_1 = StringField("Street Address: ", validators=[DataRequired()])
     address_line_2 = StringField("Street Address 2: ", validators=[Optional()])
     address_city = StringField("City: ", validators=[DataRequired()])
     address_state = StringField("State: ", validators=[DataRequired(), Length(2)])
     address_postal_code = TelField("ZIP Code: ", validators=[DataRequired(), Length(5)])
     address_country_code = SelectField('Country: ', choices=["US", "US"], validators=[DataRequired()])
-
-
-
-
-
-
 
     submit = SubmitField('Submit')
